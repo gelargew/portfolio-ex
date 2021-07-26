@@ -36,8 +36,9 @@ const GhostMesh = () => {
 
 
 
-    useFrame(() => {
-        kaoRef.current.translateZ(0.01)
+    useFrame(({ clock }) => {
+        kaoRef.current.translateZ(0.04)
+        kaoRef.current.translateY(Math.sin(clock.getElapsedTime()) * 0.01)
         prev.set(...prev.lerp(pointer, 0.01).toArray())
         kaoRef.current.lookAt(prev)
     })
@@ -47,7 +48,7 @@ const GhostMesh = () => {
 
     return (
         
-        <Box ref={box} args={[20, 20, 20, 20, 20, 20]} position={[0, 4, 0]} onClick={e => setPointer(e.point)} >
+        <Box ref={box} args={[20, 20, 20, 20, 20, 20]} position={[0, 4, 0]} onPointerMove={e => setPointer(e.point)} >
             <meshPhongMaterial wireframe side={THREE.DoubleSide} />
             <mesh   ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
                 <Kaonashi rotation={[0, Math.PI, 0]}  />

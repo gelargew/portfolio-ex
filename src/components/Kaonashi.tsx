@@ -38,5 +38,3 @@ export default function Kaonashi(props: JSX.IntrinsicElements['group']) {
     </group>
   )
 }
-
-useGLTF.preload('/kaonashi/scene.gltf')
