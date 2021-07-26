@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import Layout from '../components/Layout'
-import Kaonashi from '../components/kaonashi'
+import Kaonashi from '../components/Kaonashi'
 import { Box, OrbitControls } from '@react-three/drei'
 
 
