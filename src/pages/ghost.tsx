@@ -4,7 +4,6 @@ import * as THREE from 'three'
 import Layout from '../components/Layout'
 import Kaonashi from '../components/kaonashi'
 import { Box, OrbitControls } from '@react-three/drei'
-import { Vector3 } from 'three'
 
 
 export default function Ghost() {
