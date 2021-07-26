@@ -1,84 +1,60 @@
-import '../global.css'
-import React, { Suspense, useRef } from 'react'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { Box, OrbitControls, PerspectiveCamera, Sphere, MapControls, useTessellation, Stats } from '@react-three/drei'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useState } from 'react'
-import { EffectComposer, Noise, SSAO } from '@react-three/postprocessing'
-import Paper from '../components/paper'
 import Layout from '../components/Layout'
+import Kaonashi from '../components/Kaonashi'
+import { Box, OrbitControls } from '@react-three/drei'
 
 
-const Index = () => {
-  const camera = useRef<THREE.PerspectiveCamera>(null!)
-  const delta = useState(0)
+export default function Index() {
 
-  const lookat = (e:React.WheelEvent<HTMLDivElement>) => {
-    camera.current.rotateX(5)
-  }
-
-  return (
-    <Layout>
-      <Stats className='stats' />
-      
-      <Canvas camera={camera.current}>
-        <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 10]} onUpdate={self => self.updateProjectionMatrix()} />
-        <hemisphereLight intensity={5} color='lightyellow'  />
-        <MapControls />
-        <mesh position={[0, 0, 0]}>
-          <spotLight position={[0, 0, 0]} intensity={5} />
-          <Suspense fallback={null}>
-            <Earth />
-          </Suspense>
-        </mesh>
-        <mesh position={[10, 0, 0]}>  
-          <spotLight position={[0, 0, 0]} intensity={5} />
-          <Suspense fallback={null}>
-            <Earth />
-          </Suspense>
-        </mesh>
-        <Paper position={[20, -2, 0]} />
-        <EffectComposer>
-          
-        </EffectComposer>
-      </Canvas>
-      
-    </Layout>
-  )
+    return (
+        <Layout>
+            <Canvas>
+                <OrbitControls />
+                <Suspense fallback={null}>
+                    <ambientLight intensity={0.5} />
+                    <GhostMesh />
+                </Suspense>
+            </Canvas>
+        </Layout>
+    )
 }
 
-export default Index
+const GhostMesh = () => {
+    const { camera, mouse } = useThree()
+    const kaoRef = useRef<THREE.Mesh>()
+    const box = useRef<THREE.Object3D>()
+    const box2 = useRef<THREE.Object3D>()
+    const [pointer, setPointer] = useState(new THREE.Vector3(0, 0, 0))
+    const prev = new THREE.Vector3(0, 0, 0)
+    const prevQ = new THREE.Quaternion()
+
+    useEffect(() => {
+        camera.position.set(0, 0, 10)
+    }, [])
 
 
-const Earth = () => {
-  const erth = useRef<THREE.SphereGeometry>(null!)
-  const bx = useRef<THREE.Object3D>(null!)
-  const texture = useLoader(THREE.TextureLoader, 'https://unpkg.com/three-globe@2.18.5/example/img/earth-dark.jpg')
-  const aus = latlonToCoor(25, 133, 2)
-  const a = new THREE.Vector3().setFromSphericalCoords(2, 180, 0)
-  useFrame(() => {
-    erth.current.rotateY(0.007)
-    erth.current.rotateZ(0.01)
-    bx.current
-  })
-  const tess = useTessellation(2, 4)
-  
-  return (
+
+    useFrame(({ clock }) => {
+        kaoRef.current.translateZ(0.04)
+        kaoRef.current.translateY(Math.sin(clock.getElapsedTime()) * 0.01)
+        prev.set(...prev.lerp(pointer, 0.01).toArray())
+        kaoRef.current.lookAt(prev)
+    })
     
-      <Sphere ref={erth} args={[2, 300, 300]}>
-        <meshPhongMaterial map={texture} side={THREE.DoubleSide} />
-        <Box ref={tess} position={a} scale={0.2} />
-      </Sphere>
-     
-  )
-  
-}
+    
+    
 
-const latlonToCoor = (lat:number, lon:number, r:number): [x: number, y:number, z:number] => {
-  lat = Math.PI / 2 - lat
-  const x = Math.sin(lat) * Math.sin(lon)
-  const y = Math.cos(lat)
-  const z = Math.sin(lat) * Math.cos(lon)
-
-  return [x, y, z]
+    return (
+        
+        <Box ref={box} args={[20, 20, 20, 20, 20, 20]} position={[0, 4, 0]} onPointerMove={e => setPointer(e.point)} >
+            <meshPhongMaterial wireframe side={THREE.DoubleSide} />
+            <mesh   ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
+                <Kaonashi rotation={[0, Math.PI, 0]}  />
+            </mesh>         
+            <Box ref={box2} scale={0.5} position={[0, -9, 4]} />
+        </Box>
+        
+    )
 }

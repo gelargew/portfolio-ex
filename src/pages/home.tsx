@@ -39,7 +39,12 @@ const Room = () => {
         <mesh onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
             <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' />
             <OrbitControls />
-            <Plane rotation={[Math.PI * 1.5, 0, 0]} args={[20, 10, 20, 10]} position={[0, 0, 0]}>
+            <Plane 
+            rotation={[Math.PI * 1.5, 0, 0]} 
+            args={[20, 10, 20, 10]} 
+            position={[0, 0, 0]}
+            onClick={e => console.log(e)}
+            >
                 <meshPhongMaterial color='white' />
             </Plane>
             <Plane args={[20, 10, 20, 10]} position={[0, 5, -5]} >
