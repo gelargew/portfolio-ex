@@ -25,6 +25,7 @@ type GLTFResult = GLTF & {
 export default function Kaonashi(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/kaonashi/scene.gltf') as GLTFResult
+
   return (
     <group ref={group} {...props} dispose={null}>
         <TorusKnot />
