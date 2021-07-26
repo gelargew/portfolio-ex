@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { useState } from 'react'
 import { EffectComposer, Noise, SSAO } from '@react-three/postprocessing'
 import Paper from '../components/paper'
+import Layout from '../components/Layout'
 
 
 const Index = () => {
@@ -13,14 +14,14 @@ const Index = () => {
   const delta = useState(0)
 
   const lookat = (e:React.WheelEvent<HTMLDivElement>) => {
-    console.log(e.deltaY)
+    camera.current.rotateX(5)
   }
 
   return (
-    <main onWheel={lookat}>
+    <Layout>
       <Stats className='stats' />
       
-      <Canvas onScroll={() => console.log('q')}>
+      <Canvas camera={camera.current}>
         <PerspectiveCamera ref={camera} makeDefault position={[0, 0, 10]} onUpdate={self => self.updateProjectionMatrix()} />
         <hemisphereLight intensity={5} color='lightyellow'  />
         <MapControls />
@@ -42,7 +43,7 @@ const Index = () => {
         </EffectComposer>
       </Canvas>
       
-    </main>
+    </Layout>
   )
 }
 

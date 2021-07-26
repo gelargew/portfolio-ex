@@ -1,5 +1,5 @@
 import { Plane, OrbitControls, Torus, TorusKnot, Sphere } from '@react-three/drei'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import React, { Suspense, useRef } from 'react'
 import { useEffect } from 'react'
 import * as THREE from 'three'
@@ -31,23 +31,26 @@ const PaperModel = () => {
 const TorusModel = () => {
     const ref = useRef<THREE.Object3D>(null!)
     const light = useRef<THREE.SpotLight>(null!)
+    const plight = useRef<THREE.PointLight>(null!)
+    const { viewport, mouse } = useThree()
 
     useEffect(() => {
-        light.current.lookAt(5, 5, 0)
     }, [])
 
     useFrame(({ clock }) => {
         ref.current.rotateY(0.01)
+        plight.current.position.set(mouse.x * viewport.width / 2, mouse.y * viewport.height / 2, 0)
     })
 
     return (
         <>
+            <pointLight ref={plight} color='yellow'  intensity={20} />
             <TorusKnot scale={0.1} ref={ref} args={[5, 1, 30, 20, 3, 7]}  position={[0, 3, 0]} >
                 <meshPhongMaterial wireframe />
             </TorusKnot>
             <Sphere ref={light} scale={0.1} position={[0, 5, 0]} >
                 <meshPhongMaterial color='yellow' />
-                <spotLight color='yellow'  intensity={20} />
+                
             </Sphere>
             
         </>
