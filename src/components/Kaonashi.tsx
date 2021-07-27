@@ -7,7 +7,7 @@ title: Kaonashi (No-Face)
 */
 
 import * as THREE from 'three'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { TorusKnot, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
@@ -22,20 +22,24 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function Kaonashi(props: JSX.IntrinsicElements['group']) {
+export default function Kaonashi(props: JSX.IntrinsicElements['mesh']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/kaonashi/scene.gltf') as GLTFResult
+  useEffect(() => {
+    group.current.rotateY(Math.PI)
+  }, [])
 
   return (
-    <group ref={group} {...props} dispose={null}>
-        <TorusKnot />
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <mesh geometry={nodes.Empty_Mesh_Corpo_0.geometry} material={materials.Corpo} />
-          <mesh geometry={nodes.Empty_Mesh_Ombra_0.geometry} material={materials.Ombra} />
+    <mesh {...props}>
+      <group ref={group} dispose={null}>
+        <group rotation={[-Math.PI / 2, 0, 0]}>
+          <group rotation={[Math.PI / 2, 0, 0]}>
+            <mesh geometry={nodes.Empty_Mesh_Corpo_0.geometry} material={materials.Corpo} />
+            <mesh geometry={nodes.Empty_Mesh_Ombra_0.geometry} material={materials.Ombra} />
+          </group>
         </group>
       </group>
-    </group>
+    </mesh>
   )
 }
 
