@@ -6,7 +6,6 @@ import Layout from '../components/Layout'
 import Kaonashi from '../components/Kaonashi'
 import { Box, OrbitControls, Plane } from '@react-three/drei'
 
-
 export default function Index() {
 
     return (
@@ -52,9 +51,11 @@ const GhostMesh = ({positions=spreadPosition}) => {
 
     useFrame(({ clock }) => {
         group.current.children.forEach(obj => {
-            obj.lookAt(direction)
-            obj.translateZ(0.02)
-            obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
+            if (obj.position.distanceTo(pointer) > 10) {
+                obj.translateZ(0.02)
+                obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
+            }     
+            obj.lookAt(direction)    
         })
         direction.lerp(pointer, 0.005)
 
@@ -63,7 +64,7 @@ const GhostMesh = ({positions=spreadPosition}) => {
     return (
         
         <Box ref={box} args={[40, 20, 40, 40, 20, 40]} position={[0, 4, 0]} onPointerMove={handleClick} >
-            <meshPhongMaterial wireframe side={THREE.DoubleSide} />  
+            <meshPhongMaterial wireframe side={THREE.DoubleSide} alphaTest={0.4} />  
             <group ref={group}>
                 <mesh  ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
                     <Kaonashi />
