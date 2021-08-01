@@ -1,4 +1,3 @@
-import '../global.css'
 import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, ThreeEvent, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
