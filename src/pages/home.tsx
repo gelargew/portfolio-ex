@@ -48,14 +48,14 @@ const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -
     }
 
     useFrame(({ clock }) => {
-        // group.current.children.forEach(obj => {
-        //     if (obj.position.distanceTo(pointer) > 10) {
-        //         obj.translateZ(0.02)
-        //         obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
-        //     }     
-        //     obj.lookAt(direction)    
-        // })
-        // direction.lerp(pointer, 0.005)
+        groupp.current.children.forEach(obj => {
+            if (obj.position.distanceTo(pointer) > 10) {
+                obj.translateZ(0.02)
+                obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
+            }     
+            obj.lookAt(direction)    
+        })
+        direction.lerp(pointer, 0.005)
 
     })
  

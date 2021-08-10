@@ -10,10 +10,10 @@ export default function Layout({children}) {
         <>
             <div className='nav'>
                 <Link to='/'>index</Link>
-                <Link to='/home'>Home</Link>
                 <Link to='/room'>Room</Link>
                 <Link to='/mapcon'>Mapcon</Link>
                 <Link to='/alpha'>alpha</Link>
+                <Link to='/home'>kan</Link>
             </div>
             <main>
                 {children}
