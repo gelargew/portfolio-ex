@@ -34,13 +34,13 @@ const Canv = () => {
 
 const Model = () => {
     const texture = useLoader(THREE.TextureLoader, '/paperColor.jpg')
-    const alpha = useLoader(THREE.TextureLoader, '/alpha.png')
+    const alpha = useLoader(THREE.TextureLoader, '/drex4.png')
     const mesh = useRef<THREE.MeshLambertMaterial>(null!)
         
 
     return (
         <TorusKnot>
-            <meshLambertMaterial ref={mesh} map={texture} alphaMap={alpha} />
+            <meshLambertMaterial ref={mesh} map={texture} alphaMap={alpha} alphaTest={0.8} />
         </TorusKnot>
     )
 }

@@ -1,78 +1,64 @@
-import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Canvas, ThreeEvent, useFrame, useThree } from '@react-three/fiber'
-import * as THREE from 'three'
+import { MapControls, OrbitControls, OrbitControlsProps, Plane, TorusKnot } from '@react-three/drei'
+import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber'
+import React, { Suspense, useLayoutEffect, useRef } from 'react'
 import Layout from '../components/Layout'
-import Kaonashi from '../components/Kaonashi'
-import { Box, OrbitControls } from '@react-three/drei'
+import * as THREE from 'three'
 
-export default function Index() {
+export default function Home() {
+    
 
     return (
         <Layout>
-            <Canvas id='index'>
-                <OrbitControls />
+            <Canvas id='home'>
                 <Suspense fallback={null}>
-                    <GhostMesh />
+                    <Room />
                 </Suspense>
+                
             </Canvas>
         </Layout>
     )
 }
 
-const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -5], [-19, 10], [-10, 5]]
-}) => {
-    const { camera, mouse } = useThree()
-    const kaoRef = useRef<THREE.Mesh>(null!)
-    const box = useRef<THREE.Object3D>()
-    const box2 = useRef<THREE.Object3D>()
-    const pointer = new THREE.Vector3(20, -6, 0)
-    const direction = new THREE.Vector3(0, -6, -4)
-    const groupp = useRef<THREE.Group>(null!)
+const Room = () => {
+    const { camera, mouse, viewport } = useThree()
+    const light = useRef<THREE.PointLight>(null!)
+    const obj1 = useRef<THREE.Object3D>(null!)
+    const orbControl = useRef<typeof OrbitControls>(null!)
+    const alpha = useLoader(THREE.TextureLoader, '/drex4.png')
 
 
-    useEffect(() => {
-        camera.position.set(0, 0, 10)
-        console.log(kaoRef.current)
-        if (positions.length > 0) {
-            positions.forEach(val => {
-                let newMesh = kaoRef.current.clone()
-                newMesh.position.set(val[0], -10 , val[1])
-                groupp.current.add(newMesh)
-            })
-        }
+    useLayoutEffect(() => {
+        camera.position.set(0, 7, 5)
+        camera.lookAt(obj1.current.position)
     }, [])
 
-    const handleClick = (e:ThreeEvent<PointerEvent>) => {
-        
-        pointer.copy(e.point).setY(-6)
-    }
-
     useFrame(({ clock }) => {
-        // group.current.children.forEach(obj => {
-        //     if (obj.position.distanceTo(pointer) > 10) {
-        //         obj.translateZ(0.02)
-        //         obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
-        //     }     
-        //     obj.lookAt(direction)    
-        // })
-        // direction.lerp(pointer, 0.005)
+        obj1.current.translateY(Math.sin(clock.getElapsedTime()) * 0.03)
 
     })
- 
+
+    
+
     return (
-        <>
-            <ambientLight intensity={0.5} />
-            <Box ref={box} args={[40, 20, 40, 40, 20, 40]} position={[0, 4, 0]} onPointerMove={handleClick} >
-                <meshPhongMaterial wireframe side={THREE.DoubleSide} alphaTest={0.4} />  
-                <group ref={groupp}>
-                    <mesh  ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
-                        <Kaonashi />
-                    </mesh> 
-                </group>      
-                        
-                <Box ref={box2} scale={0.5} position={[0, -9, 4]} />
-            </Box>
-        </>
-        
+        <mesh onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
+            <OrbitControls />
+            <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' />
+            <Plane 
+            rotation={[Math.PI * 1.5, 0, 0]} 
+            args={[20, 10, 20, 10]} 
+            position={[0, 0, 0]}
+            >
+                <meshPhongMaterial color='white' />
+            </Plane>
+            <Plane args={[20, 10, 20, 10]} position={[0, 5, -5]} >
+                <meshPhongMaterial color='brown' alphaMap={alpha} alphaTest={0.9} side={THREE.DoubleSide} />
+            </Plane>
+            <Plane rotation={[0, Math.PI * 1.5, 0]} args={[10, 10, 10, 10]} position={[10, 5, 0]} >
+                <meshPhongMaterial color='brown' />
+            </Plane>
+            <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} >
+
+            </TorusKnot>
+        </mesh>
     )
 }
