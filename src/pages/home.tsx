@@ -9,7 +9,7 @@ export default function Home() {
 
     return (
         <Layout>
-            <Canvas>
+            <Canvas id='home'>
                 <Suspense fallback={null}>
                     <Room />
                 </Suspense>

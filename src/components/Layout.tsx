@@ -1,6 +1,7 @@
 import '../global.css'
 import React from 'react'
 import { Link } from 'gatsby'
+import { useGLTF } from '@react-three/drei'
 
 
 export default function Layout({children}) {
@@ -20,3 +21,5 @@ export default function Layout({children}) {
         </>
     )
 }
+
+useGLTF.preload('/kaonashi/scene.gltf')

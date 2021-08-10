@@ -43,4 +43,3 @@ export default function Kaonashi(props: JSX.IntrinsicElements['mesh']) {
   )
 }
 
-useGLTF.preload('/kaonashi/scene.gltf')

@@ -36,7 +36,7 @@ const Model = () => {
     const texture = useLoader(THREE.TextureLoader, '/paperColor.jpg')
     const alpha = useLoader(THREE.TextureLoader, '/alpha.png')
     const mesh = useRef<THREE.MeshLambertMaterial>(null!)
-    
+        
 
     return (
         <TorusKnot>
