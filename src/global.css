@@ -58,6 +58,16 @@ main {
     height: 100vh;
   }
 
+.logo {
+  position: fixed;
+  z-index: 5;
+  left: 5%;
+  top: 5%;
+}
+
+.logo * {
+  margin: 0;
+}
 
 .nav {
   position: fixed;
@@ -66,4 +76,34 @@ main {
   display: flex;
   flex-direction: column;
   z-index: 10;
+}
+
+.contact {
+  padding: 1rem;
+  z-index: 5;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  left: 100%;
+  top: 100%;
+  transform: translate(-100%, -100%);
+}
+
+.contact * {
+  margin: 0;
+}
+
+.works {
+  z-index: 5;
+  position: fixed;
+  left: 100%;
+  top: 0%;
+  transform: translateX(-100%);
+  padding: 2rem;
+  margin: 0;
+}
+
+.works:hover {
+  cursor: pointer;
 }
