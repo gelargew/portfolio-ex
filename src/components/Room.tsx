@@ -29,7 +29,6 @@ const RoomMesh = () => {
 
 
     useLayoutEffect(() => {
-        camera.position.set(0, 7, 5)
         ca.current?.lookAt(5, 5, 0)
     }, [])
 
@@ -44,7 +43,7 @@ const RoomMesh = () => {
     return (
         <>
             <Sphere ref={sph} args={[50, 5, 5]}>
-                <PerspectiveCamera ref={ca} makeDefault position={[-5, 10, 20]} />
+                <PerspectiveCamera ref={ca} makeDefault position={[-5, 12, 20]} />
                 <meshPhongMaterial wireframe />
                 <OrbitControls />
             </Sphere>

@@ -4,8 +4,9 @@ import { Link } from 'gatsby'
 import { useGLTF } from '@react-three/drei'
 
 
-export default function Layout({children}) {
+export default function Layout({children, setShowWorks} : {children: any, setShowWorks?: React.Dispatch<React.SetStateAction<boolean>>}) {
 
+    
     return (
         <>
             <div className='logo'>
@@ -15,7 +16,7 @@ export default function Layout({children}) {
             <main>
                 {children}
             </main>
-            <h3 className='works'>Works</h3>
+            <h3 className='show-works' onClick={() => setShowWorks(prev => !prev)} >Works</h3>
             <div className='contact'>
                 <a href='https://github.com/gelargew'>GitHub</a>
                 <p>gelargew@gmail.com</p>
