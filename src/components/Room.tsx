@@ -30,7 +30,9 @@ const RoomMesh = () => {
 
     useLayoutEffect(() => {
         ca.current?.lookAt(5, 5, 0)
-        ca.current?.position.set(-10, 15, 20)
+        setTimeout(() => {
+            ca.current?.position.set(-10, 15, 40)
+        }, 1000)
     }, [progress])
 
     useFrame(({ clock }) => {
@@ -44,7 +46,7 @@ const RoomMesh = () => {
     return (
         <>
             <Sphere ref={sph} args={[50, 5, 5]}>
-                <PerspectiveCamera ref={ca} makeDefault position={[-5, 12, 20]} />
+                <PerspectiveCamera ref={ca} makeDefault position={[-10, 15, 20]} />
                 <meshPhongMaterial wireframe />
                 <OrbitControls />
             </Sphere>
