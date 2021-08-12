@@ -27,6 +27,9 @@ const RoomMesh = () => {
     const sph = useRef<THREE.Object3D>(null)
     const alpha = useLoader(THREE.TextureLoader, '/drex4.png')
 
+    const setCameraPosition = (vec: [x: number, y: number, z: number]) => {
+        sph.current.position.set(...vec)
+    }
 
     useLayoutEffect(() => {
         ca.current?.lookAt(5, 5, 0)
@@ -52,7 +55,7 @@ const RoomMesh = () => {
             </Sphere>
             <mesh onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
             
-                <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' />
+                <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' position={[0, 10, 0]} />
                 <Plane 
                 rotation={[Math.PI * 1.5, 0, 0]} 
                 args={[20, 10, 20, 10]} 
@@ -66,7 +69,7 @@ const RoomMesh = () => {
                 <Plane rotation={[0, Math.PI * 1.5, 0]} args={[10, 10, 10, 10]} position={[10, 5, 0]} >
                     <meshPhongMaterial color='brown' />
                 </Plane>
-                <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} >
+                <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} onClick={() => setCameraPosition([0, -60, 0])} >
 
                 </TorusKnot>
             </mesh>
@@ -84,7 +87,15 @@ const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -
     const pointer = new THREE.Vector3(20, -6, 0)
     const direction = new THREE.Vector3(0, -6, -4)
     const groupp = useRef<THREE.Group>(null!)
-    const clones = []
+    const baseVectors = new THREE.Vector3(40, -10, 40)
+    const bVectors = new THREE.Vector3(-0.5, 0, -0.5)
+    const randomVectors = [
+        new THREE.Vector3().random().add(bVectors).multiply(baseVectors),
+        new THREE.Vector3().random().add(bVectors).multiply(baseVectors),
+        new THREE.Vector3().random().add(bVectors).multiply(baseVectors),
+        new THREE.Vector3().random().add(bVectors).multiply(baseVectors),
+        new THREE.Vector3().random().add(bVectors).multiply(baseVectors)
+    ]
 
     useEffect(() => {
         camera.position.set(0, 0, 10)
@@ -104,12 +115,13 @@ const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -
     }
 
     useFrame(({ clock }) => {
-        groupp.current.children.forEach(obj => {
-            if (obj.position.distanceTo(pointer) > 10) {
+        groupp.current.children.forEach((obj, idx) => {
+            if (obj.position.distanceTo(direction) < 10) null
+            else if (obj.position.distanceTo(direction) > 10) {
                 obj.translateZ(0.02)
-                obj.translateY(Math.sin(clock.getElapsedTime() * 2) * 0.02)
-            }     
-            obj.lookAt(direction)    
+                obj.translateZ(0.02)
+            }
+            obj.translateY(Math.sin((idx + clock.getElapsedTime()) * 2) * 0.02)      
         })
         direction.lerp(pointer, 0.005)
 
@@ -119,8 +131,8 @@ const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -
         <>
             
             <Box ref={box} args={[40, 20, 40, 40, 20, 40]} position={[0, -20, 0]} onPointerMove={handleClick} >
-                <pointLight intensity={0.5} />
-                <MeshWobbleMaterial attach='material' factor={1} speed={0.1} skinning={false} wireframe side={THREE.DoubleSide} alphaTest={0.4} />
+                <pointLight intensity={10} color='blue' position={[0, 5, 0]} />
+                <MeshDistortMaterial attach='material' color='grey' distort={0.2} wireframe opacity={0.5} speed={0} skinning={false} side={THREE.DoubleSide} alphaTest={0.4} />
                 <group ref={groupp}>
                     <mesh  ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
                         <Kaonashi />

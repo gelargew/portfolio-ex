@@ -17,6 +17,7 @@ export default function Layout({children, setShowWorks} : {children: any, setSho
                 {children}
             </main>
             <h3 className='show-works' onClick={() => setShowWorks(prev => !prev)} >Works</h3>
+            <p id='wip'>*under construction</p>
             <div className='contact'>
                 <a href='https://github.com/gelargew'>GitHub</a>
                 <p>gelargew@gmail.com</p>

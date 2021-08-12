@@ -154,3 +154,13 @@ main {
   cursor: pointer;
   color: var(--color-text-dim);
 }
+
+#wip {
+  font-size: smaller;
+  position: fixed;
+  z-index: 5;
+  top: 100%;
+  left: 0%;
+  transform: translateY(-100%);
+  padding: 2rem;
+}
