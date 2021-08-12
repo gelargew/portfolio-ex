@@ -1,4 +1,4 @@
-import { Box, OrbitControls, MeshWobbleMaterial, PerspectiveCamera, Plane, Sphere, TorusKnot, MeshDistortMaterial } from '@react-three/drei'
+import { Box, OrbitControls, MeshWobbleMaterial, PerspectiveCamera, Plane, Sphere, TorusKnot, MeshDistortMaterial, useProgress } from '@react-three/drei'
 import { Canvas, useFrame, useThree, useLoader, ThreeEvent } from '@react-three/fiber'
 import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
@@ -20,7 +20,7 @@ export default function Room() {
 }
 
 const RoomMesh = () => {
-    const { camera, mouse, viewport } = useThree()
+    const { progress } = useProgress()
     const light = useRef<THREE.PointLight>(null!)
     const obj1 = useRef<THREE.Object3D>(null!)
     const ca = useRef<THREE.PerspectiveCamera>(null)
@@ -30,7 +30,8 @@ const RoomMesh = () => {
 
     useLayoutEffect(() => {
         ca.current?.lookAt(5, 5, 0)
-    }, [])
+        ca.current?.position.set(-10, 15, 20)
+    }, [progress])
 
     useFrame(({ clock }) => {
         obj1.current.translateY(Math.sin(clock.getElapsedTime()) * 0.03)
