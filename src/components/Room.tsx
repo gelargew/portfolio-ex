@@ -33,12 +33,19 @@ const RoomMesh = () => {
 
     useLayoutEffect(() => {
         ca.current?.lookAt(5, 5, 0)
+        ca.current.zoom = ca.current.zoom * 0.001
+        ca.current.updateProjectionMatrix()
+        console.log(ca.current.zoom)
         setTimeout(() => {
-            ca.current?.position.set(-10, 15, 40)
+    
         }, 1000)
     }, [progress])
 
     useFrame(({ clock }) => {
+        if (ca.current.zoom < 1) {
+            ca.current.zoom = ca.current.zoom + (0.0001*(20 - clock.getElapsedTime()))
+            ca.current.updateProjectionMatrix()
+        }
         obj1.current.translateY(Math.sin(clock.getElapsedTime()) * 0.03)
         sph.current?.rotateY(0.01)
         sph.current.rotateX(Math.sin(clock.getElapsedTime())*0.002)
@@ -49,11 +56,11 @@ const RoomMesh = () => {
     return (
         <>
             <Sphere ref={sph} args={[50, 5, 5]}>
-                <PerspectiveCamera ref={ca} makeDefault position={[-10, 15, 20]} />
+                <PerspectiveCamera ref={ca} makeDefault position={[-10, 15, 40]} />
                 <meshPhongMaterial wireframe />
                 <OrbitControls />
             </Sphere>
-            <mesh onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
+            <mesh onClick={() => console.log(ca.current.zoom)} onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
             
                 <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' position={[0, 10, 0]} />
                 <Plane 
@@ -80,7 +87,6 @@ const RoomMesh = () => {
 
 const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -5], [-19, 10], [-10, 5]]
 }) => {
-    const { camera, mouse } = useThree()
     const kaoRef = useRef<THREE.Mesh>(null!)
     const box = useRef<THREE.Object3D>()
     const box2 = useRef<THREE.Object3D>()
@@ -98,7 +104,6 @@ const GhostMesh = ({positions=[[0, 0], [5, 0], [10, 0], [20,1], [-8, 2], [-19, -
     ]
 
     useEffect(() => {
-        camera.position.set(0, 0, 10)
         console.log(kaoRef.current)
         if (positions.length > 0) {
             positions.forEach(val => {   
