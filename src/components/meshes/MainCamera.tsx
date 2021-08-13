@@ -13,18 +13,14 @@ export default function MainCamera() {
         camera.zoom = camera.zoom * 0.001
         camera.updateProjectionMatrix()
         controlRef.current.target = cameraTarget
-    }, [])
+    }, [camera])
 
-    useEffect(() => {
-        controlRef.current.target = cameraTarget
-        container.current.position.set(...cameraTarget.toArray())
-    }, [cameraTarget])
 
     useFrame(({clock}) => {
         container.current.rotateY(0.005)
         container.current.rotateX(Math.sin(clock.getElapsedTime())*0.002)
         if (camera.zoom < 1) {
-            camera.zoom = camera.zoom + (clock.getElapsedTime() / 4000)
+            camera.zoom = camera.zoom + 0.003*(Math.pow(0.1, camera.zoom))
             camera.updateProjectionMatrix()
         }
     })
