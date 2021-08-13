@@ -2,7 +2,7 @@ import { Box, OrbitControls, MeshWobbleMaterial, PerspectiveCamera, Plane, Spher
 import { Canvas, useFrame, useThree, useLoader, ThreeEvent } from '@react-three/fiber'
 import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
-import Kaonashi from './Kaonashi'
+import Kaonashi from './meshes/Kaonashi'
 
 export default function Room() {
     
