@@ -12,32 +12,16 @@ export default function RoomMesh() {
     const alpha = useLoader(THREE.TextureLoader, '/drex4.png')
     const container = useRef<THREE.Mesh>(null)
 
-    useLayoutEffect(() => {
-        camera.lookAt(5, 5, 0)
-        camera.zoom = camera.zoom * 0.001
-        camera.updateProjectionMatrix()
-        console.log(camera.zoom)
-        setTimeout(() => {
-    
-        }, 1000)
-    }, [progress])
-
     useFrame(({ clock }) => {
-        if (camera.position.distanceTo(container.current.position) > 10) {
-            camera.zoom = camera.zoom + (0.0001*(20 - clock.getElapsedTime()))
-            camera.updateProjectionMatrix()
-        }
         obj1.current.translateY(Math.sin(clock.getElapsedTime()) * 0.03)
         
     })
-
-    
 
     return (
         <>
             <mesh ref={container} onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
             
-                <pointLight ref={light} decay={2} intensity={0.4} color='lightblue' position={[0, 10, 0]} />
+                <pointLight ref={light} decay={0.4} intensity={0.2} color='lightblue' position={[0, 10, 0]} />
                 <Plane 
                 rotation={[Math.PI * 1.5, 0, 0]} 
                 args={[20, 10, 20, 10]} 

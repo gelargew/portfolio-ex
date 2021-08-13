@@ -10,8 +10,8 @@ type Obj2Props = {
 export default function Obj2({ position=[50, -10, -100]}: Obj2Props) {
 
     return (
-        <Box args={[10, 10, 100, 100, 100, 100]} position={position} >
-            <meshPhongMaterial color='yellow' />
+        <Box args={[10, 10, 10, 100, 100, 100]} position={position} >
+            <meshPhongMaterial  wireframe />
         </Box>
     )
 }
