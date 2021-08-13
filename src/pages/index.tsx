@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../components/Layout'
-import Room from '../components/Room'
-import Works from '../components/Works'
 import {Helmet} from 'react-helmet'
+
+import Layout from '../components/Layout'
+import MainBackground from '../components/MainBackground'
+import Works from '../components/Works'
 
 export default function index() {
     const [showWorks, setShowWorks] = useState(false)
@@ -16,7 +17,7 @@ export default function index() {
                 <meta charSet="utf-8" />
                 <title>A curious developer | Gelar Rustiawan</title>
             </Helmet>
-            <Room />
+            <MainBackground />
             {showWorks ? <Works setShowWorks={setShowWorks} /> : ''}
         </Layout>
     )
