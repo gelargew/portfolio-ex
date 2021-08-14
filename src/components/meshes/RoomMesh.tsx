@@ -3,8 +3,11 @@ import { Canvas, useFrame, useThree, useLoader, ThreeEvent } from '@react-three/
 import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
 
+type RoomMeshProps = {
+    position?: [x: number, y: number, z: number]
+}
 
-export default function RoomMesh() {
+export default function RoomMesh({ position=[0, 0, 0]}: RoomMeshProps) {
     const { camera } = useThree()
     const { progress } = useProgress()
     const light = useRef<THREE.PointLight>(null!)
@@ -19,9 +22,8 @@ export default function RoomMesh() {
 
     return (
         <>
-            <mesh ref={container} onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
-            
-                <pointLight ref={light} decay={0.4} intensity={0.2} color='lightblue' position={[0, 10, 0]} />
+            <mesh ref={container} position={position} onPointerMove={e => light.current.position.set(e.point.x - 1, e.point.y + 1, e.point.z + 1)} >
+                <pointLight ref={light} decay={3} intensity={1} distance={50} color='lightblue' position={[0, 10, 0]} />
                 <Plane 
                 rotation={[Math.PI * 1.5, 0, 0]} 
                 args={[20, 10, 20, 10]} 
@@ -36,7 +38,7 @@ export default function RoomMesh() {
                     <meshPhongMaterial color='brown' />
                 </Plane>
                 <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} >
-
+                    <meshPhongMaterial color='lightyellow' />
                 </TorusKnot>
             </mesh>
         </>

@@ -53,18 +53,15 @@ export default function GhostsMesh({positions=[[0, 0], [5, 0], [10, 0], [20,1], 
  
     return (
         <>
-            
-            <Box ref={box} args={[40, 20, 40, 40, 20, 40]} position={[0, -20, 0]} onPointerMove={handleClick} >
-                <pointLight intensity={4} color='blue' position={[0, -10, 0]} />
-                <MeshDistortMaterial attach='material' color='grey' distort={0.2} wireframe opacity={0.5} speed={0} skinning={false} side={THREE.DoubleSide} alphaTest={0.4} />
-                <group ref={groupp}>
-                    <mesh  ref={kaoRef} scale={0.01} position={[0, -10, 0]}>
-                        <Kaonashi />
-                    </mesh> 
-                </group>      
+                      
+            <group ref={groupp} position={[0, 0, 0]} >
+                <mesh  ref={kaoRef} scale={0.01} position={[0, 0, 0]}>
+                    <Kaonashi />
+                </mesh> 
+            </group>      
                         
-                <Box ref={box2} scale={0.5} position={[0, -9, 4]} />
-            </Box>
+                
+            
         </>
         
     )
