@@ -1,8 +1,7 @@
 const React = require("react")
-const Layout = require("./src/components/Layout")
-
 
 // Wraps every page in a component
-exports.wrapPageElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>
+export function wrapPageElement({ element, props }) {
+    const Layout = element.type.Layout ?? React.Fragment
+    return <Layout {...props}>{element}</Layout>
 }

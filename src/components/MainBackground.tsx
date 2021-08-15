@@ -19,9 +19,9 @@ export default function MainBackground() {
                 <Suspense fallback={null}>
                     <RoomMesh position={[0, -10, 0]} />
                 </Suspense>
-                <Suspense fallback={null}>
+                {/* <Suspense fallback={null}>
                     <GhostsMesh />
-                </Suspense>
+                </Suspense> */}
                 <Obj2 />
                 <Landscape position={[0, -10, 0]} />      
             </Canvas>    

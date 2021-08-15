@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const WORKS = [
@@ -31,20 +31,22 @@ const WORKS = [
 ]
 
 export default function Works({ setShowWorks } : { setShowWorks?: React.Dispatch<React.SetStateAction<boolean>>}) {
+    const [clicked, setClicked] = useState(false)
 
     return (
         <div className='work-list'>
             <h2 className='close-work-list' onClick={() => navigate('/')}>X</h2>
             {WORKS.map(work => 
-                <Work work={work} />
+                <Work work={work} setClicked={setClicked} />
             )}
         </div>
     )
 }
 
-const Work = ({work}: { work: typeof WORKS[0]}) => {
+const Work = ({work, setClicked}: { work: typeof WORKS[0], setClicked: React.Dispatch<React.SetStateAction<boolean>>}) => {
+
     return (
-        <div className='work'>
+        <div className='work' onClick={() => setClicked(true)}>
             <h3>{work.title}</h3>
             <p><small>{work.year}</small></p>
             <p>{work.type}</p>

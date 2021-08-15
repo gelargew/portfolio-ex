@@ -1,6 +1,6 @@
-import { Box, OrbitControls, MeshWobbleMaterial, PerspectiveCamera, Plane, Sphere, TorusKnot, MeshDistortMaterial, useProgress } from '@react-three/drei'
-import { Canvas, useFrame, useThree, useLoader, ThreeEvent } from '@react-three/fiber'
-import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
+import { Plane, Sphere, TorusKnot } from '@react-three/drei'
+import {  useFrame,useLoader } from '@react-three/fiber'
+import React, { useRef, useState } from 'react'
 import * as THREE from 'three'
 
 type RoomMeshProps = {
@@ -8,15 +8,15 @@ type RoomMeshProps = {
 }
 
 export default function RoomMesh({ position=[0, 0, 0]}: RoomMeshProps) {
-    const { camera } = useThree()
-    const { progress } = useProgress()
     const light = useRef<THREE.PointLight>(null!)
     const obj1 = useRef<THREE.Object3D>(null!)
     const alpha = useLoader(THREE.TextureLoader, '/drex4.png')
     const container = useRef<THREE.Mesh>(null)
+    const [torusSpeed, setTorusSpeed] = useState(0.1)
 
     useFrame(({ clock }) => {
         obj1.current.translateY(Math.sin(clock.getElapsedTime()) * 0.03)
+        obj1.current.rotateY(torusSpeed)
         
     })
 
@@ -37,7 +37,7 @@ export default function RoomMesh({ position=[0, 0, 0]}: RoomMeshProps) {
                 <Plane rotation={[0, Math.PI * 1.5, 0]} args={[10, 10, 10, 10]} position={[10, 5, 0]} >
                     <meshPhongMaterial color='brown' />
                 </Plane>
-                <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} >
+                <TorusKnot ref={obj1} scale={0.5} position={[3, 3, 0]} onPointerEnter={() => setTorusSpeed(0.4)} onPointerLeave={() => setTorusSpeed(0.1)} >
                     <meshPhongMaterial color='lightyellow' />
                 </TorusKnot>
             </mesh>

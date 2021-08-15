@@ -10,21 +10,23 @@ export default function Layout({children, setShowWorks} : {children: any, setSho
 
     
     return (
-        <>
-            <div className='logo'>
-                <h3>Gelar Rustiawan</h3>
-                <p>Creative Developer</p>
+        <>         
+            <MainBackground />
+            <div id='navigation'>
+                <div className='logo'>
+                    <h3>Gelar Rustiawan</h3>
+                    <p>Creative Developer</p>
+                </div>
+                <h3 className='show-works' onClick={() => navigate('/about/')} >Works</h3>
+                <p id='wip'>*under construction</p>
+                <div className='contact'>
+                    <a href='https://github.com/gelargew'>GitHub</a>
+                    <p>gelargew@gmail.com</p>
+                </div>
             </div>
             <main>
-                <MainBackground />
                 {children}
-            </main>
-            <h3 className='show-works' onClick={() => navigate('/about/')} >Works</h3>
-            <p id='wip'>*under construction</p>
-            <div className='contact'>
-                <a href='https://github.com/gelargew'>GitHub</a>
-                <p>gelargew@gmail.com</p>
-            </div>
+            </main>          
         </>
     )
 }
