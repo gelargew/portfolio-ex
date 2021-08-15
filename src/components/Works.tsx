@@ -1,3 +1,4 @@
+import { navigate } from 'gatsby';
 import React from 'react';
 
 
@@ -33,7 +34,7 @@ export default function Works({ setShowWorks } : { setShowWorks?: React.Dispatch
 
     return (
         <div className='work-list'>
-            <h2 className='close-work-list' onClick={() => setShowWorks(prev => !prev)}>X</h2>
+            <h2 className='close-work-list' onClick={() => navigate('/')}>X</h2>
             {WORKS.map(work => 
                 <Work work={work} />
             )}

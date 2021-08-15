@@ -3,8 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Sphere, PerspectiveCamera, OrbitControlsProps } from '@react-three/drei'
 import * as THREE from 'three'
 
-import Kaonashi from './Kaonashi'
-
 export default function MainCamera() {
     const { camera } = useThree()
     const container = useRef<THREE.Object3D>(null)
@@ -29,7 +27,7 @@ export default function MainCamera() {
     
     return (
         <Sphere ref={container} args={[1000, 5, 5]} onClick={() => camera.lookAt(50, -10, -100)}>
-            <pointLight decay={2} intensity={2} distance={100} color='lightblue' position={[10, 17, 35]} />
+            <pointLight decay={2} intensity={2} distance={100} color='lightblue' position={[40, 17, 35]} />
             <PerspectiveCamera far={300} makeDefault position={[-10, 15, 40]} />
             <meshPhongMaterial wireframe />
             <OrbitControls ref={controlRef} />

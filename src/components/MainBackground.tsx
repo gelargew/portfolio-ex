@@ -12,19 +12,20 @@ import Kaonashi from './meshes/Kaonashi'
 
 export default function MainBackground() {
    
-    return (      
-        <Canvas id='home'>   
-            <MainCamera />       
-            <Suspense fallback={null}>
-                <RoomMesh position={[0, -10, 0]} />
-            </Suspense>
-            <Suspense fallback={null}>
-                <GhostsMesh />
-            </Suspense>
-            <Obj2 />
-            <Landscape position={[0, -10, 0]} />
-             
-        </Canvas>
-        
+    return (
+        <div id='main-background'>
+            <Canvas id='home'>   
+                <MainCamera />       
+                <Suspense fallback={null}>
+                    <RoomMesh position={[0, -10, 0]} />
+                </Suspense>
+                <Suspense fallback={null}>
+                    <GhostsMesh />
+                </Suspense>
+                <Obj2 />
+                <Landscape position={[0, -10, 0]} />      
+            </Canvas>    
+        </div>
+         
     )
 }
