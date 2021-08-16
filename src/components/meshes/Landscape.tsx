@@ -1,4 +1,4 @@
-import { Plane, MeshDistortMaterial, Box } from '@react-three/drei';
+import { Plane, MeshDistortMaterial, Box, Reflector } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import React, { useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
@@ -13,9 +13,11 @@ export default function Landscape(props: JSX.IntrinsicElements['planeGeometry'] 
     
 
     return (
-        <Plane ref={planeRef} args={[200, 200, 200, 200]} rotation={[Math.PI*1.5, 0, 0]} scale={5} {...props}>
-            <MeshDistortMaterial attach='material' distort={0.3} speed={0} color={landscapeColor} skinning={true} />
-            <instancedMesh ref={instances} args={[box, mate, 100]} position={[0, 5, 0]} />
-        </Plane>
+        <>
+            <Plane ref={planeRef} args={[200, 200, 200, 200]} rotation={[Math.PI*1.5, 0, 0]} scale={5} {...props}>
+                <MeshDistortMaterial attach='material' distort={0.3} speed={0} color={landscapeColor} skinning={true} />
+                <instancedMesh ref={instances} args={[box, mate, 100]} position={[0, 5, 0]} />
+            </Plane>
+    </>
     )
 }

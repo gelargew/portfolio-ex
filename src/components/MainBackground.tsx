@@ -7,6 +7,7 @@ import MainCamera from './meshes/MainCamera'
 import RoomMesh from './meshes/RoomMesh'
 import Obj2 from './meshes/Obj2'
 import Landscape from './meshes/Landscape'
+import VideoBox from './meshes/videoBox'
 
 
 export default function MainBackground() {
@@ -22,11 +23,14 @@ export default function MainBackground() {
                     <GhostsMesh />
                 </Suspense> */}
                 <Obj2 position={[0, 15, 0]} />
-                <Landscape position={[0, -10, 0]} />    
+                <Landscape position={[0, -10, 0]} /> 
+                <Suspense fallback={null}>
+                    <VideoBox />   
+                </Suspense>
+                
 
                 <EffectComposer>
-                    <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
-                    <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                    <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={200} />
                 </EffectComposer>  
             </Canvas>    
         </div>
