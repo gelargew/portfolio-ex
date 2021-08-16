@@ -1,4 +1,4 @@
-import { Box } from '@react-three/drei'
+import { Box, Effects } from '@react-three/drei'
 import { EffectComposer, Glitch, Bloom, Vignette } from '@react-three/postprocessing'
 import React from 'react'
 import { BoxBufferGeometry } from 'three'
@@ -52,6 +52,9 @@ export default function Obj2({ position=[50, -10, -100]}: Obj2Props) {
     return (
         <Box args={[10, 10, 10, 100, 100, 100]} position={position} >
             <meshPhongMaterial wireframe />
+            {/* <Effects>
+                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={200} />
+            </Effects> */}
         </Box>
     )
 }

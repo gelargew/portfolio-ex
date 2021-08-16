@@ -13,7 +13,9 @@ const VideoBox = () => {
     
     return (
     <>
-        
+        <Plane args={[10, 10, 10, 10]} position={[5, 10, -5]}>
+            <meshPhongMaterial wireframe />
+        </Plane>
     </>
     )
 }
