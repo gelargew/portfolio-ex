@@ -1,14 +1,13 @@
 import { Canvas } from '@react-three/fiber'
 import React, { Suspense } from 'react'
+import { EffectComposer, DepthOfField, Bloom, Noise, Vignette } from '@react-three/postprocessing'
 
 
 import MainCamera from './meshes/MainCamera'
 import RoomMesh from './meshes/RoomMesh'
-import GhostsMesh from './meshes/GhostsMesh'
 import Obj2 from './meshes/Obj2'
-import { MeshDistortMaterial, Plane } from '@react-three/drei'
 import Landscape from './meshes/Landscape'
-import Kaonashi from './meshes/Kaonashi'
+
 
 export default function MainBackground() {
    
@@ -22,8 +21,13 @@ export default function MainBackground() {
                 {/* <Suspense fallback={null}>
                     <GhostsMesh />
                 </Suspense> */}
-                <Obj2 />
-                <Landscape position={[0, -10, 0]} />      
+                <Obj2 position={[0, 15, 0]} />
+                <Landscape position={[0, -10, 0]} />    
+
+                <EffectComposer>
+                    <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
+                    <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                </EffectComposer>  
             </Canvas>    
         </div>
          

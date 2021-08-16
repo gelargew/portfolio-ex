@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {Helmet} from 'react-helmet'
+import { navigate } from 'gatsby'
 
 import Layout from '../components/Layout'
+import Level1 from '../components/level1'
 
 function index() {
     const [showWorks, setShowWorks] = useState(false)
@@ -13,9 +15,20 @@ function index() {
         <>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>A curious developer | Gelar Rustiawan</title>
+                <title>Gelar Rustiawan</title>
             </Helmet>
-            <h1>hello</h1>
+            <div id='navigation'>
+                <div className='logo'>
+                    <h3>Gelar Rustiawan</h3>
+                    <p>Creative Developer</p>
+                </div>
+                <h3 className='show-works' onClick={() => navigate('/about/')} >Works</h3>
+                <p id='wip'>*under construction</p>
+                <div className='contact'>
+                    <a href='https://github.com/gelargew'>GitHub</a>
+                    <p>gelargew@gmail.com</p>
+                </div>
+            </div>
         </>
     )
 }
