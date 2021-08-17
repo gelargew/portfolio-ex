@@ -10,8 +10,7 @@ function about() {
     return (
         <>
             <Helmet>
-                <meta charSet="utf-8" />
-                <title>A curious developer | Gelar Rustiawan</title>
+                <title>Gelar Rustiawan | About</title>
             </Helmet>
             <Works />
         </>

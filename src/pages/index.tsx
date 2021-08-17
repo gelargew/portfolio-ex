@@ -16,19 +16,11 @@ function index() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Gelar Rustiawan</title>
+                <link rel="icon" type="svg" href="/GR-4.svg" sizes="16x16" />
             </Helmet>
-            <div id='navigation'>
-                <div className='logo'>
-                    <h3>Gelar Rustiawan</h3>
-                    <p>Creative Developer</p>
-                </div>
-                <h3 className='show-works' onClick={() => navigate('/about/')} >Works</h3>
-                <p id='wip'>*under construction</p>
-                <div className='contact'>
-                    <a href='https://github.com/gelargew'>GitHub</a>
-                    <p>gelargew@gmail.com</p>
-                </div>
-            </div>
+            <h1>HAI</h1>
+            <Level1 />
+            <Level1 />
         </>
     )
 }

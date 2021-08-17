@@ -24,9 +24,7 @@ export default function MainBackground() {
                 </Suspense>
                 <Obj2 position={[0, 15, 0]} />
                 <Landscape position={[0, -10, 0]} /> 
-                <EffectComposer>
-                    <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={200} />
-                </EffectComposer>  
+                 
                 
             </Canvas>    
         </div>
