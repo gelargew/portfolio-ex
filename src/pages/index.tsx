@@ -18,9 +18,9 @@ function index() {
                 <title>Gelar Rustiawan</title>
                 <link rel="icon" type="svg" href="/GR-4.svg" sizes="16x16" />
             </Helmet>
-            <h1>HAI</h1>
+            {/* <h1>HAI</h1>
             <Level1 />
-            <Level1 />
+            <Level1 /> */}
         </>
     )
 }

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import useOnscreen from '../hooks/useOnscreen';
 import '../styles/level1.css'
 
 
 const Level1 = () => {
+    const a = useRef()
+    const isVisible = useOnscreen(a)
+
+    useEffect(() => {
+        console.log(isVisible)
+    }, [isVisible])
 
     return (
-        <div id='level1' onWheel={e => console.log(e)} onClick={e => console.log(e)} >
-            <h1 onClick={() => alert('yo')}>LEVEL 1</h1>
+        <div id='level1' onClick={e => console.log(e)} >
+            <h1 ref={a}>LEVEL 1</h1>
             {/* <div id='navigation'>
                 <div className='logo'>
                     <h3>Gelar Rustiawan</h3>
