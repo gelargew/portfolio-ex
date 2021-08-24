@@ -14,8 +14,11 @@ export default function Landscape(props: JSX.IntrinsicElements['boxGeometry'] & 
 
     return (
         <>
-            <Plane castShadow ref={planeRef} args={[10, 10, 300, 300]} scale={200} rotation={[Math.PI*1.5, 0, 0]} {...props}>
-                <meshLambertMaterial attach='material' color={landscapeColor} wireframe />
+            <Plane receiveShadow ref={planeRef} args={[10, 10, 300, 300]} scale={200} rotation={[Math.PI*1.5, 0, 0]} {...props}>
+                <shadowMaterial attach='material' color='white' opacity={0.4} />
+            </Plane>
+            <Plane receiveShadow ref={planeRef} args={[10, 10, 300, 300]} scale={200} rotation={[Math.PI*1.5, 0, 0]} {...props}>
+                <meshLambertMaterial side={THREE.DoubleSide} attach='material' color='white' opacity={0.4} />
             </Plane>
     </>
     )

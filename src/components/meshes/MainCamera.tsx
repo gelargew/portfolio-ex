@@ -29,7 +29,7 @@ export default function MainCamera({ level = new THREE.Vector3(0, 0, 0) }) {
     
     return (
         <group ref={container} onClick={() => camera.lookAt(50, -10, -100)}>
-            <pointLight decay={2} intensity={2} distance={300} color='lightblue' position={[40, 17, 35]} />
+            <pointLight castShadow receiveShadow decay={2} intensity={2} distance={300} color='lightblue' position={[40, 17, 35]} />
             <PerspectiveCamera far={500} makeDefault position={[-10, 15, 40]} />
             <meshPhongMaterial wireframe />
             <OrbitControls ref={controlRef} />
