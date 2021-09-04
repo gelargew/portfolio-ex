@@ -13,6 +13,7 @@ import GhostsMesh from './meshes/GhostsMesh'
 import LowPolyHead from './meshes/LowPolyHead'
 import { Box, MeshDistortMaterial, Plane, shaderMaterial, TorusKnot } from '@react-three/drei'
 import { useEffect } from 'react'
+import ParticleWave from './ParticleWave'
 
 
 
@@ -24,7 +25,9 @@ export default function MainBackground() {
             <Canvas id='home' shadows>   
                 <MainCamera level={level} />       
                 <Suspense fallback={null}>
-                    <Level1 />
+                    {/* <GhostsMesh />
+                    <RoomMesh /> */}
+                    <ParticleWave />
                 </Suspense>    
                 <ambientLight intensity={1} />
                 <Box args={[5, 5, 5, 5,5,5]} position={[0, -50, 0]} onClick={() => setLevel(new THREE.Vector3(0, 0, 0))} />

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 import MainBackground from './MainBackground'
+import Cursor from './Cursor'
+import Works from './Works'
 
 
 export default function Layout({children, setShowWorks} : {children: any, setShowWorks?: React.Dispatch<React.SetStateAction<boolean>>}) {
@@ -20,9 +22,11 @@ export default function Layout({children, setShowWorks} : {children: any, setSho
     return (
         <>         
             <MainBackground />
+            <Cursor />
             <main >
                 {children}
-            </main>          
+            </main>      
+            <Works />    
         </>
     )
 }
