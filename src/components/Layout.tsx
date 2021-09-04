@@ -26,7 +26,6 @@ export default function Layout({children, setShowWorks} : {children: any, setSho
             <main >
                 {children}
             </main>      
-            <Works />    
         </>
     )
 }

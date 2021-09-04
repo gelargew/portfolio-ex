@@ -23,6 +23,5 @@ export default function Cursor() {
         position: 'absolute',
         filter: 'invert(1)',
         mixBlendMode: 'difference',
-        zIndex: 200
     }}></div>
 }

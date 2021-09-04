@@ -19,6 +19,18 @@ import ParticleWave from './ParticleWave'
 
 export default function MainBackground() {
     const [level, setLevel] = useState(new THREE.Vector3(0, 0, 0))
+    const geometryCircle = new THREE.SphereGeometry(5, 50, 50)
+    const geometryBox = new THREE.BoxGeometry(10, 10, 10, 50, 50, 50)
+    const geometries = [
+        new THREE.BoxGeometry(10, 10, 10, 50, 50, 50),
+        new THREE.SphereGeometry(5, 50, 50),
+        new THREE.TorusGeometry(5, 5, 40),
+        new THREE.TorusKnotGeometry(5)
+    ]
+    const [geometry, setGeometry] = useState<any>(geometries[3])
+    useLayoutEffect(() => {
+        setInterval(() => setGeometry(geometries[Math.floor(Math.random()*geometries.length)]), 6000)
+    }, [])
 
     return (
         <div id='main-background'>
@@ -27,7 +39,8 @@ export default function MainBackground() {
                 <Suspense fallback={null}>
                     {/* <GhostsMesh />
                     <RoomMesh /> */}
-                    <ParticleWave />
+                    <ParticleWave geometry={geometry} />
+                    {/* <LowPolyHead /> */}
                 </Suspense>    
                 <ambientLight intensity={1} />
                 <Box args={[5, 5, 5, 5,5,5]} position={[0, -50, 0]} onClick={() => setLevel(new THREE.Vector3(0, 0, 0))} />
