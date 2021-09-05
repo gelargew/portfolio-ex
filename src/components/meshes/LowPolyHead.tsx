@@ -27,7 +27,9 @@ export default function LowPolyHead(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 1.5, 0]} >
         <group position={[4.08, 1.01, 5.9]} rotation={[-0.27, 0.6, 1.93]} scale={[1, 1, 1]} />
-        <mesh castShadow receiveShadow geometry={nodes.Plane_0.geometry} material={materials.Root} />
+        <mesh castShadow receiveShadow geometry={nodes.Plane_0.geometry}>
+          <meshPhongMaterial />
+        </mesh>
       </group>
     </group>
   )

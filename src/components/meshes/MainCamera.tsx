@@ -17,8 +17,8 @@ export default function MainCamera({ level = new THREE.Vector3(0, 0, 0) }) {
    
 
     useFrame(({clock}) => {
-        container.current.rotateY(0.005)
-        container.current.rotateX(Math.sin(clock.getElapsedTime())*0.002)
+        /* container.current.rotateY(0.005)
+        container.current.rotateX(Math.sin(clock.getElapsedTime())*0.002) */
         if (camera.zoom < 1) {
             camera.zoom = camera.zoom + 0.003*(Math.pow(0.1, camera.zoom))
             camera.updateProjectionMatrix()
