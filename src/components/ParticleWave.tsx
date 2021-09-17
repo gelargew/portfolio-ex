@@ -3,6 +3,8 @@ import React, { useRef, useMemo, useState, useEffect, useLayoutEffect } from 're
 import { Canvas, InstancedMeshProps, useFrame } from '@react-three/fiber'
 import { MeshSurfaceSampler } from 'three-stdlib'
 import { Group } from 'three'
+import { useStorage } from '../storage'
+
 
 const COLORS = [
   'red',
@@ -17,7 +19,7 @@ const COLORS = [
 
 
 export default function ParticleWave({
-    n=3000,
+    n=2000,
     colors=COLORS
 }: { n?: number, colors?: typeof COLORS }) {
   const geometries = [
@@ -42,17 +44,14 @@ export default function ParticleWave({
   const [noiseX, noiseY, noiseZ] = useMemo(() => ([Math.random(), Math.random(), Math.random()]), [sampler])
   const speed = useMemo(() => Math.floor(Math.random()*20), [sampler])
   const material = useRef<THREE.MeshPhongMaterial>(null)
-  
+  const storage = useStorage()
+
   useLayoutEffect(() => {
     setInterval(() => {
+
       setGeometry(geometries[Math.floor(Math.random()*(geometries.length))])
-      for (let i = 0; i < n; i += 100) {
-        const tempColor = new THREE.Color(colors[Math.floor(Math.random()*colors.length)])
-        for (let j = i; j < i + 100; j++) {
-          mesh.current.setColorAt(j, tempColor)
-        }
-      }
     }, 6000)
+
   }, [])
 
 
@@ -70,8 +69,8 @@ export default function ParticleWave({
 
 
   return (
-    <group position={[30, 0, 0]} scale={2} ref={group} >
-        <instancedMesh ref={mesh} args={[null, null, n]} >
+    <group position={[30, 0, 0]} scale={2} ref={group}  >
+        <instancedMesh  ref={mesh} args={[null, null, n]} >
             <dodecahedronBufferGeometry args={[0.02, 0]} />
             <meshPhongMaterial ref={material} />
         </instancedMesh>

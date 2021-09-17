@@ -1,13 +1,16 @@
 import React, { useEffect, useRef } from "react"
+import { useStorage } from "../storage"
+
 
 export default function Cursor() {
     const cursor = useRef<HTMLDivElement>()
+    const {cursorSize} = useStorage()
+
 
     const handlePointerMove = (e: PointerEvent) => {
-        cursor.current.style.top = e.pageY - 25 + 'px'
-        cursor.current.style.left = e.pageX - 25 + 'px'
+        cursor.current.style.top = e.pageY - cursorSize/2 + 'px'
+        cursor.current.style.left = e.pageX - cursorSize/2 + 'px'
     }
-
     useEffect(() => {
         document.addEventListener('pointermove', handlePointerMove)
 
@@ -16,12 +19,12 @@ export default function Cursor() {
 
     return <div ref={cursor} style={{
         backgroundColor: 'black',
-        borderRadius: 25,
-        height: 50,
-        width: 50,
+        borderRadius: cursorSize/2,
+        height: cursorSize,
+        width: cursorSize,
         display: 'block',
         position: 'absolute',
         filter: 'invert(1)',
-        mixBlendMode: 'difference',
+        mixBlendMode: 'difference'
     }}></div>
 }

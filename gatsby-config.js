@@ -3,5 +3,5 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "covmap",
   },
-  plugins: ["gatsby-plugin-gatsby-cloud","gatsby-plugin-react-helmet"],
+  plugins: ["gatsby-plugin-react-helmet"],
 };

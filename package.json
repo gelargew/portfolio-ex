@@ -15,19 +15,16 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "gatsby": "^3.9.1",
-    "gatsby-plugin-gatsby-cloud": "^2.10.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
-  "devDependencies": {
     "@react-three/drei": "^7.2.1",
-    "@react-three/fiber": "^7.0.6",
+    "@react-three/fiber": "^7.0.7",
     "@react-three/postprocessing": "^2.0.5",
     "@types/react-helmet": "^6.1.2",
     "@types/three": "^0.130.0",
-    "gatsby-plugin-layout": "^2.11.0",
+    "animejs": "^3.2.1",
+    "gatsby": "^3.9.1",
     "gatsby-plugin-react-helmet": "^4.11.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "three": "^0.130.1"
   }

@@ -1,6 +1,5 @@
 import { Canvas, useLoader, extend, useThree, useFrame } from '@react-three/fiber'
 import React, { Suspense, useState, useRef, useLayoutEffect } from 'react'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 
 
@@ -26,7 +25,7 @@ export default function MainBackground() {
 
     return (
         <div id='main-background'>
-            <Canvas id='home' shadows>   
+            <Canvas id='home' shadows >   
                 <MainCamera level={level} />       
                 <Suspense fallback={null}>
                     {/* <GhostsMesh />

@@ -4,30 +4,24 @@ import { useGLTF } from '@react-three/drei'
 
 import MainBackground from './MainBackground'
 import Cursor from './Cursor'
-import Works from './Works'
+import { StorageProvider, useStorage } from '../storage'
 
 
 export default function Layout({children, setShowWorks} : {children: any, setShowWorks?: React.Dispatch<React.SetStateAction<boolean>>}) {
     const [scrollAmount, SetScrollAmount] = useState(0)
-
-    const handleScroll = (e:Event) => {
-        
-    }
+    const storage = useStorage()    
+    
     useEffect(() => {
-        window.addEventListener('wheel', handleScroll)
-
-        return () => window.removeEventListener('wheel', handleScroll)
+        console.log(storage)
     }, [])
     
     return (
-        <>         
+        <StorageProvider>         
             <MainBackground />
             <Cursor />
             <main >
                 {children}
             </main>      
-        </>
+        </StorageProvider>
     )
 }
-
-useGLTF.preload('/kaonashi/scene.gltf')
